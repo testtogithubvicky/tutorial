@@ -1,0 +1,165 @@
+package Electricity_Bill;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+
+public class Ebill2 {
+
+	private JFrame frame;
+	private JTextField t1;
+	private JTextField t2;
+	private JTextField t3;
+	private JTextArea ta = new JTextArea();
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Ebill2 window = new Ebill2();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Ebill2() {
+		initialize();
+	}
+	String cid,cname,unit;
+	double charge,grandtotal;
+	int count;
+	public void print()
+	{
+		cid=t1.getText();
+		cname=t2.getText();
+		unit=t3.getText();
+		ta.setText(ta.getText()+"\n");
+		ta.setText(ta.getText()+"Electricity Billing System"+"\n");
+		ta.setText(ta.getText()+"\n");
+		ta.setText(ta.getText()+"Customer ID:"+cid+"\n");
+		ta.setText(ta.getText()+"Customer Name:"+cname+"\n");
+		ta.setText(ta.getText()+"Unit:"+unit+"\n");
+		ta.setText(ta.getText()+"Amount:"+grandtotal+"\n");
+		ta.setText(ta.getText()+"Thank You Come Again");
+	}
+
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Electricity Billing System");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblNewLabel.setBounds(158, 10, 330, 49);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(26, 91, 713, 393);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Custmer ID");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_1.setBounds(22, 31, 182, 45);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Custmer Name");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_1_1.setBounds(22, 119, 182, 45);
+		panel.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Unit");
+		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_1_2.setBounds(22, 200, 182, 45);
+		panel.add(lblNewLabel_1_2);
+		
+		t1 = new JTextField();
+		t1.setBounds(214, 38, 208, 39);
+		panel.add(t1);
+		t1.setColumns(10);
+		
+		t2 = new JTextField();
+		t2.setColumns(10);
+		t2.setBounds(214, 126, 208, 39);
+		panel.add(t2);
+		
+		t3 = new JTextField();
+		t3.setColumns(10);
+		t3.setBounds(214, 207, 208, 39);
+		panel.add(t3);
+		
+		
+		ta.setBounds(485, 24, 200, 247);
+		panel.add(ta);
+		
+		JButton btnNewButton = new JButton("CALCULATE");
+		btnNewButton.setFont(new Font("Algerian", Font.BOLD, 20));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cid=t1.getText();
+				count=Integer.parseInt(t3.getText());
+				if(count<500)
+				{
+					charge=1.00;
+					
+				}
+				else if(count<500 && count<600)
+				{
+					charge=1.80;
+					}
+				else if(count<600 && count<800)
+				{
+					charge=2.80;
+					}
+				else
+				{
+					charge=3.00;
+				}
+				grandtotal=charge*count;
+				JOptionPane.showMessageDialog(null, "Grandtoal:"+grandtotal);
+				
+				}
+			
+		});
+		btnNewButton.setBounds(38, 295, 166, 59);
+		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("PRINT");
+		btnNewButton_1.setFont(new Font("Algerian", Font.BOLD, 20));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				print();
+			}
+			
+		
+		});
+		btnNewButton_1.setBounds(453, 295, 166, 59);
+		panel.add(btnNewButton_1);
+	}
+
+}
